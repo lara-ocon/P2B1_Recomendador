@@ -190,7 +190,7 @@ def load(dict):
     else:
         # En el caso que si haya encontrado la canción habrá diccionario, por lo que 
         # imprimos las 5 canciones recomendadas
-        print("También te puede gustar...\n")
+        print("\nTambién te puede gustar...\n")
         canciones = list(dict.keys())
         for cancion in canciones:
             print("\033[1;34m"+cancion+"\033[0;m\n")
@@ -221,6 +221,7 @@ if __name__ == "__main__":
 
     except:
         print("\nDebes pasar una canción por argumento para que podamos recomendarte que escuchar! :) \n")
+        print('\nSi ya nos has pasado una canción, prueba a ponerla entre comillas! (Por ejemplo: "The Real Slim Shady"\n')
         
 
     
