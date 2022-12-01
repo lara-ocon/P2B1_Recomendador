@@ -178,22 +178,23 @@ def mismo_key(key1, key2):
 
 
 def load(dict):
-    # Función de carga de datos, esta función 
+    # Función de carga de datos, esta función imprimirá la salida del recomendador por 
+    # pantalla
     if dict == {}:
         # si el diccionario está vacío es porque no se ha encontrado
         # la cancion introducida en el csv, por lo que recomendamos una
         # al azar
         # Esto es que no ha encontrado la cancion en el csv, asi que recomendamos una aleatoria
-        print(f"\nVaya! No sabemos cual es esa canción...   :( ")
+        print("\033[1;35m"+f"\nVaya! No sabemos cual es esa canción...   :( "+"\033[0;m\n")
         cancion = df_canciones.iloc[random.randint(0, len(df_canciones)-1)]
-        print(f'\nPero prueba a escuchar  "{cancion.song}" de {cancion.artist} !!!\n')
+        print(f'\nPero prueba a escuchar '+"\033[3;36m"+f"{cancion.song}"+"\033[0;m"+f' de {cancion.artist} !!!\n')
     else:
         # En el caso que si haya encontrado la canción habrá diccionario, por lo que 
         # imprimos las 5 canciones recomendadas
-        print("\nTambién te puede gustar...\n")
+        print("\033[1;37m"+"\nTambién te puede gustar..."+"\033[0;m\n")
         canciones = list(dict.keys())
         for cancion in canciones:
-            print("\033[1;34m"+cancion+"\033[0;m\n")
+            print("\033[3;36m"+cancion+"\033[0;m\n")
 
 
 if __name__ == "__main__":
@@ -208,20 +209,23 @@ if __name__ == "__main__":
         # de que introduzca la cancion
         cancion_actual = sys.argv[1]
 
+
         # EXTRACCIÓN DE DATOS:
         archivo_csv = 'songs_normalize.csv'
         df_canciones = extract(archivo_csv)
+
 
         # TRANSFORMAMOS LOS DATOS: en función de la cancion que nos introduzcan
         # buscamos las 5 mejores canciones relacionadas con esta
         mejores_canciones = transform(df_canciones, cancion_actual)
 
+
         # CARGA DE DATOS: imprimimos la recomendación por pantalla
         load(mejores_canciones)
-
-    except:
-        print("\nDebes pasar una canción por argumento para que podamos recomendarte que escuchar! :) \n")
-        print('\nSi ya nos has pasado una canción, prueba a ponerla entre comillas! (Por ejemplo: "The Real Slim Shady"\n')
+    
+    except Exception as e:
+        print("\033[1;36m"+"\nDebes pasar una canción por argumento para que podamos recomendarte que escuchar! :) \n")
+        print('\nSi ya nos has pasado una canción, prueba a ponerla entre comillas! (Por ejemplo: "The Real Slim Shady" )'+"\033[0;m\n")
         
 
     
